@@ -1,0 +1,12 @@
+{
+  "global": {
+    "noData": "No data",
+    "error": "Error",
+    "back": "Back",
+    "delete": "Delete",
+    "submit": "Confirm",
+    "add": "Add",
+    "yes": "Yes",
+    "no": "No"
+  }
+}

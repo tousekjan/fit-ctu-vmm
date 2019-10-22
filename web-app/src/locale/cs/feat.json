@@ -1,0 +1,14 @@
+{
+  "global": {
+    "noData": "Žádná data",
+    "error": "Chyba",
+    "female": "Žena",
+    "male": "Muž",
+    "back": "Zpět",
+    "delete": "Smazat",
+    "submit": "Potvrdit",
+    "add": "Přidat",
+    "yes": "Ano",
+    "no": "Ne"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "errors": {
+    "default": "Unknown error occurred",
+    "users": {
+      "alreadyExists": "Username {{ username }} already exists",
+      "emailAlreadyExists": "Email {{ email }} already exists",
+      "identityUpdateFailed": "Username or password error"
+    },
+    "classes": {
+      "alreadyExistError": "Classroom {{classroom}} already exists"
+    }
+  }
+}

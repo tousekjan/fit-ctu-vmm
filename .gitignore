@@ -1,0 +1,7 @@
+web-app/node_modules
+web-app/dist
+web-app/coverage
+web-app/yarn-error.log
+web-app/.cache
+web-app/schema.json
+web-app/.DS_Store
