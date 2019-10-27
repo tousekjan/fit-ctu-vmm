@@ -34,13 +34,19 @@ export const StyledLogo = styled.div`
 `
 
 export const StyledInput = styled(Input)`
-  max-width: 500px;
+  max-width: 580px;
   height: 30px;
-  margin: 15px !important;
+  margin-top: 15px !important;
+  margin-bottom: 5px !important;
+`
+
+export const StyledTitle = styled.p`
+  margin-top: 5px;
+  margin-bottom: 3px;
 `
 
 export const StyledDescription = styled.p`
-  margin-right: 10px;
+  margin-left: 10px;
   margin-top: 7px;
 `
 

@@ -26,7 +26,7 @@ const SliderBox = ({ name, disabled, setFieldValue, values }: Props) => {
         disabled={disabled}
         min={1}
         max={100}
-        style={{ marginLeft: 10 }}
+        style={{ marginLeft: 10, width: '70px' }}
         value={values[name]}
         onChange={data => setFieldValue(name, data)}
       />
