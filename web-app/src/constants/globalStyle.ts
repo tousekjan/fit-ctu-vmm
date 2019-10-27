@@ -27,4 +27,21 @@ export default createGlobalStyle`
   table {
       font-size: 14px;
   }
+
+  .ant-pagination-item-link, .ant-avatar, .ant-calendar-prev-year-btn, .ant-calendar-next-year-btn, .ant-calendar-prev-month-btn,
+  .ant-calendar-next-month-btn, .ant-calendar-year-panel-prev-decade-btn, .ant-calendar-year-panel-next-decade-btn,
+  .ant-calendar-month-panel-prev-year-btn, .ant-calendar-month-panel-next-year-btn,
+  .ant-calendar-decade-panel-prev-century-btn, .ant-calendar-decade-panel-next-century-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ant-calendar-year-panel-header, .ant-calendar-month-panel-header, .ant-calendar-decade-panel-header {
+    position: relative;
+  }
+
+  .ant-calendar-month-panel-body, .ant-calendar-year-panel-body, .ant-calendar-decade-panel-body {
+    height: 0;
+  }
 `

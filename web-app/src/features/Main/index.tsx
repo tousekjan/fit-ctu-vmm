@@ -1,20 +1,18 @@
-import React from 'react'
+import { DatePicker, Icon } from 'antd';
 import { Formik } from 'formik'
-
-import { StyledBody, StyledHeader, StyledLogo, StyledInput, MainLayout } from './styled';
-// import { Flex } from 'components/Layout/styled';
-import { Button, Icon, DatePicker, Slider, InputNumber, Switch } from 'antd';
 import moment from 'moment';
+import React from 'react'
+
 import { Flex } from 'components/Layout/styled';
-moment.locale('cs');
+import SliderBox from 'components/SliderBox';
+import { MainLayout, StyledBody, StyledButton, StyledDescription, StyledHeader, StyledInput, StyledLogo, StyledSwitch } from './styled';
 
 const Main = ({ }) => {
   // const credentials = qs.parse(search, { ignoreQueryPrefix: true })
-  console.log('main')
   return (
     <MainLayout>
       <StyledHeader>
-        <StyledLogo> Flickr++</StyledLogo>
+        <StyledLogo>Flickr++</StyledLogo>
       </StyledHeader>
       <StyledBody>
         <Formik
@@ -27,40 +25,32 @@ const Main = ({ }) => {
         >
           {({ submitForm, values, handleChange, setFieldValue }) => (
             <>
-              {/* <Wrapper> */}
-              <br></br>
-              <StyledInput value={values.search} prefix={<Icon type="search"></Icon>} placeholder="Photos, people or groups" onChange={handleChange}></StyledInput>
-              <br></br>
+              <StyledInput
+                value={values.search}
+                prefix={<Icon type="search"></Icon>}
+                placeholder="Photos, people or groups"
+                onChange={handleChange}
+              />
 
               <Flex direction="row">
-                <Switch defaultChecked={values.uploadedChecked} onChange={(data) => setFieldValue('uploadedChecked', data)} />
-                <DatePicker value={values.uploaded} format={'DD/MM/YYYY'} onChange={(data) => setFieldValue('uploaded', moment(data, 'DD/MM/YYYY'))}/>
-                <div style={{ width: '150px' }} >
-                  <Slider
-                    min={1}
-                    max={100}
-                    onChange={(data) => setFieldValue('uploadedWeight', data)}
-                    value={values.uploadedWeight}
+                <StyledDescription>Date upload</StyledDescription>
+                <StyledSwitch defaultChecked={values.uploadedChecked} onChange={data => setFieldValue('uploadedChecked', data)} />
+                <div>
+                  <DatePicker
+                    disabled={!values.uploadedChecked}
+                    value={values.uploaded}
+                    format={'DD/MM/YYYY'}
+                    allowClear={false}
+                    onChange={data => setFieldValue('uploaded', data ? moment(data, 'DD/MM/YYYY') : data)}
                   />
                 </div>
-                <InputNumber
-                  min={1}
-                  max={100}
-                  style={{ marginLeft: 16 }}
-                  value={values.uploadedWeight}
-                  onChange={(data) => setFieldValue('uploadedWeight', data)}
-                />
+                <SliderBox name="uploadedWeight" disabled={!values.uploadedChecked} setFieldValue={setFieldValue} values={values} />
               </Flex>
 
-              <br></br>
-
-              <Button onClick={() => submitForm()}>Search</Button>
-              {/* </Wrapper> */}
+              <StyledButton onClick={() => submitForm()}>Search</StyledButton>
             </>
           )}
         </Formik>
-
-
       </StyledBody>
     </MainLayout>
   )

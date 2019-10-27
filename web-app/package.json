@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Dev stack",
   "main": "index.js",
-  "author": "Pepa Vidlák",
+  "author": "Cyril Urban",
   "license": "MIT",
   "scripts": {
     "ts:watch": "tsc -w --noEmit",

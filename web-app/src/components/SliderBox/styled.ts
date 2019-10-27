@@ -1,4 +1,4 @@
-import { Button, Input, Layout, Switch } from 'antd'
+import { Input, Layout } from 'antd'
 import styled from 'styled-components'
 
 export const StyledHeader = styled(Layout)`
@@ -25,7 +25,6 @@ export const StyledBody = styled(Layout)`
   align-items: center;
   background: white !important;
 `
-
 export const StyledLogo = styled.div`
   color: white;
   width: 80%;
@@ -36,20 +35,4 @@ export const StyledLogo = styled.div`
 export const StyledInput = styled(Input)`
   max-width: 500px;
   height: 30px;
-  margin: 15px !important;
-`
-
-export const StyledDescription = styled.p`
-  margin-right: 10px;
-  margin-top: 7px;
-`
-
-export const StyledSwitch = styled(Switch)`
-  margin-right: 10px !important;
-  margin-top: 6px !important;
-`
-
-export const StyledButton = styled(Button)`
-  margin: 15px;
-  width: 150px;
 `
