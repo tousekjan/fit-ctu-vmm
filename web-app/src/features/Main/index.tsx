@@ -5,7 +5,7 @@ import React from 'react'
 
 import { Flex } from 'components/Layout/styled';
 import SliderBox from 'components/SliderBox';
-import { MainLayout, StyledBody, StyledButton, StyledDescription, StyledHeader, StyledInput, StyledLogo, StyledSwitch, StyledTitle } from './styled';
+import { MainLayout, StyledBody, StyledButton, StyledDescription, StyledGeosuggest, StyledHeader, StyledInput, StyledInputBox, StyledLogo, StyledSwitch, StyledTitle } from './styled';
 
 const Main = ({ }) => {
   // const credentials = qs.parse(search, { ignoreQueryPrefix: true })
@@ -21,10 +21,13 @@ const Main = ({ }) => {
             uploaded: moment(new Date, 'DD/MM/YYYY'),
             uploadedWeight: 50,
             uploadedChecked: false,
-
             width: 1000,
             widthWeight: 50,
             widthChecked: false,
+            lat: null,
+            lon: null,
+            geoWeight: 50,
+            geoChecked: false,
           }}
           // validationSchema={ValidationSchoolEditMode}
           // validateOnChange={true}
@@ -34,12 +37,16 @@ const Main = ({ }) => {
         >
           {({ submitForm, values, handleChange, setFieldValue }) => (
             <>
-              <StyledInput
-                value={values.search}
-                prefix={<Icon type="search"></Icon>}
-                placeholder="Photos, people or groups"
-                onChange={handleChange}
-              />
+              <StyledInputBox direction="row">
+                <StyledInput
+                  name="search"
+                  value={values.search}
+                  prefix={<Icon type="search"></Icon>}
+                  placeholder="Photos, people or groups"
+                  onChange={handleChange}
+                />
+                <StyledButton type="ghost" icon="search" onClick={() => submitForm()}>Search</StyledButton>
+              </StyledInputBox>
 
               <Flex direction="column">
                 <StyledTitle>Date uploaded</StyledTitle>
@@ -47,7 +54,7 @@ const Main = ({ }) => {
                   <StyledSwitch defaultChecked={values.uploadedChecked} onChange={data => setFieldValue('uploadedChecked', data)} />
                   <div>
                     <DatePicker
-                      style={{ width: '250px' }}
+                      style={{ width: '350px' }}
                       disabled={!values.uploadedChecked}
                       value={values.uploaded}
                       format={'DD/MM/YYYY'}
@@ -68,16 +75,29 @@ const Main = ({ }) => {
                     min={0}
                     max={5000}
                     step={100}
-                    style={{ width: '250px' }}
+                    style={{ width: '350px' }}
                     value={values.width}
                     onChange={data => setFieldValue('width', data)}
                   />
-                  <StyledDescription> weight </StyledDescription>
+                  <StyledDescription>weight</StyledDescription>
                   <SliderBox name="widthWeight" disabled={!values.widthChecked} setFieldValue={setFieldValue} values={values} />
                 </Flex>
-              </Flex>
 
-              <StyledButton onClick={() => submitForm()}>Search</StyledButton>
+                <StyledTitle>Location of picture</StyledTitle>
+                <Flex direction="row">
+                  <StyledSwitch defaultChecked={values.geoChecked} onChange={data => setFieldValue('geoChecked', data)} />
+                  <StyledGeosuggest
+                    placeholder=""
+                    disabled={!values.geoChecked}
+                    onSuggestSelect={data => {
+                      setFieldValue('lat', data.location.lat);
+                      setFieldValue('lon', data.location.lng);
+                    }}
+                  />
+                  <StyledDescription> weight </StyledDescription>
+                  <SliderBox name="geoWeight" disabled={!values.geoChecked} setFieldValue={setFieldValue} values={values} />
+                </Flex>
+              </Flex>
             </>
           )}
         </Formik>
