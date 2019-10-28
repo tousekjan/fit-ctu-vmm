@@ -4,6 +4,8 @@ const common = require('./webpack.common.js')
 const config = require('./env')
 
 const webpack = require('webpack')
+console.log('process.env.STAGE_CONFIG', process.env.STAGE_CONFIG)
+
 
 module.exports = merge(common, {
   mode: 'development',
@@ -20,7 +22,7 @@ module.exports = merge(common, {
     historyApiFallback: true,
     contentBase: [
       path.resolve(config.build.DIR_NAME, config.build.OUTPUT),
-      path.resolve(config.build.DIR_NAME, `config/stageConfig/${process.env.STAGE_CONFIG || 'alpha'}`),
+      path.resolve(config.build.DIR_NAME, `config/stageConfig/${process.env.STAGE_CONFIG || 'localhost'}`),
     ],
     overlay: {
       warnings: true,

@@ -1,0 +1,3 @@
+var Conf = {
+  mock: true
+}

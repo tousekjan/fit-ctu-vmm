@@ -1,6 +1,8 @@
-// import axios from 'axios'
+import axios from 'axios'
 import qs from 'qs'
 import { Dispatch, useState } from 'react'
+
+import config from 'constants/conf'
 import { SearchParams, Status } from './interfaces'
 
 export const useFetch = (baseUrl: string): [Dispatch<string>, Status] => {
@@ -12,16 +14,18 @@ export const useFetch = (baseUrl: string): [Dispatch<string>, Status] => {
         setError(false)
         setLoading(true)
 
-        // try {
-        //     const result = await axios(`${baseUrl}${url}`)
-        //     setData(result.data)
-        // } catch (error) {
-        //     setError(true)
-        // }
-
-        // tmp for test - mock and simulate loading
-        await wait(2000)
-        setData(getMock())
+        if (config.mock) {
+            // tmp for test - mock and simulate loading
+            await wait(2000)
+            setData(getMock())
+        } else {
+            try {
+                const result = await axios(`${baseUrl}${url}`)
+                setData(result.data)
+            } catch (error) {
+                setError(true)
+            }
+        }
 
         setLoading(false)
     }

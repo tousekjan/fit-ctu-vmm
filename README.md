@@ -12,6 +12,9 @@ A school project for course MI-VMM for advanced search on Flickr.
  - web-app running on `http://localhost:8000`
  - (for searching is necessary tu run backend on http://localhost:8080 and implement API - see below)
 
+### Run frontend with mock of backend
+ - run `yarn dev:mock`, alternatively `npm run dev:mock`
+
 
 ## API design and description:
 

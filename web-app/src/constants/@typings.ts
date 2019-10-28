@@ -1,5 +1,3 @@
-export interface UrlParams {
-  userId?: string
-  classroomId?: string
-  schoolId?: string
+export interface IConf {
+  mock?: boolean
 }
