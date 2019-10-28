@@ -1,24 +1,36 @@
-import { DatePicker, Icon, InputNumber } from 'antd';
+import { Icon } from 'antd'
 import { Formik } from 'formik'
-import moment from 'moment';
+import moment from 'moment'
 import React from 'react'
 
-import { Flex } from 'components/Layout/styled';
-import Loading from 'components/Loading';
-import SliderBox from 'components/SliderBox';
-import { SearchParams } from './interfaces';
-import { MainLayout, StyledBody, StyledButton, StyledDescription, StyledGeosuggest, StyledHeader, StyledInput, StyledInputBox, StyledLoadingWrapper, StyledLogo, StyledSwitch, StyledTitle } from './styled';
-import { parseToQuery, useFetch } from './utils';
+import { Flex } from 'components/Layout/styled'
+import Loading from 'components/Loading'
+import SliderBox from 'components/SliderBox'
+import { SearchParams } from './interfaces'
+import {
+  MainLayout,
+  StyledBody,
+  StyledButton,
+  StyledDatePicker,
+  StyledDescription,
+  StyledGalleryLeft,
+  StyledGalleryRight,
+  StyledGeosuggest,
+  StyledHeader,
+  StyledImage,
+  StyledInput,
+  StyledInputBox,
+  StyledInputNumber,
+  StyledLoadingWrapper,
+  StyledLogo, StyledSwitch,
+  StyledTitle,
+  StyledTitlePicture,
+  StyledTitleWrapper,
+} from './styled'
+import { parseToQuery, useFetch } from './utils'
 
 const Main = ({ }) => {
-  const [fetchData, { loading, /*error, data*/ }] = useFetch('http://localhost:8080');
-
-  if (loading) {
-    return (
-      <StyledLoadingWrapper>
-        <Loading />
-      </StyledLoadingWrapper>)
-  }
+  const [fetchData, { loading, data /*error*/ }] = useFetch('http://localhost:8080')
 
   return (
     <MainLayout>
@@ -41,7 +53,7 @@ const Main = ({ }) => {
             geoChecked: false,
           } as SearchParams}
           onSubmit={(data: SearchParams) => {
-            fetchData(`/search?${parseToQuery(data)}`);
+            fetchData(`/search?${parseToQuery(data)}`)
           }}
         >
           {({ submitForm, values, handleChange, setFieldValue }) => (
@@ -62,8 +74,7 @@ const Main = ({ }) => {
                 <Flex direction="row">
                   <StyledSwitch defaultChecked={values.uploadedChecked} onChange={data => setFieldValue('uploadedChecked', data)} />
                   <div>
-                    <DatePicker
-                      style={{ width: '350px' }}
+                    <StyledDatePicker
                       disabled={!values.uploadedChecked}
                       value={values.uploaded}
                       format={'DD/MM/YYYY'}
@@ -79,12 +90,11 @@ const Main = ({ }) => {
                 <StyledTitle>Picture width (px)</StyledTitle>
                 <Flex direction="row">
                   <StyledSwitch defaultChecked={values.widthChecked} onChange={data => setFieldValue('widthChecked', data)} />
-                  <InputNumber
+                  <StyledInputNumber
                     disabled={!values.widthChecked}
                     min={0}
                     max={5000}
                     step={100}
-                    style={{ width: '350px' }}
                     value={values.width}
                     onChange={data => setFieldValue('width', data)}
                   />
@@ -99,8 +109,8 @@ const Main = ({ }) => {
                     placeholder=""
                     disabled={!values.geoChecked}
                     onSuggestSelect={data => {
-                      setFieldValue('lat', data.location.lat);
-                      setFieldValue('lon', data.location.lng);
+                      setFieldValue('lat', data.location.lat)
+                      setFieldValue('lon', data.location.lng)
                     }}
                   />
                   <StyledDescription> weight </StyledDescription>
@@ -110,6 +120,29 @@ const Main = ({ }) => {
             </>
           )}
         </Formik>
+
+        {loading &&
+          <StyledLoadingWrapper>
+            <Loading />
+          </StyledLoadingWrapper>
+        }
+
+        {!loading && data && <>
+          <StyledTitleWrapper direction="row" justify="center" alignItems="center">
+            <StyledTitlePicture>Orignal</StyledTitlePicture>
+            <StyledTitlePicture>Reranked</StyledTitlePicture>
+          </StyledTitleWrapper>
+
+          <Flex direction="row">
+            <StyledGalleryLeft justify="center" alignItems="center">
+              {data.original.map(picture => <StyledImage key={`${picture}-original`} src={picture} />)}
+            </StyledGalleryLeft>
+            <StyledGalleryRight justify="center" alignItems="center">
+              {data.reranked.map(picture => <StyledImage key={`${picture}-reranked`} src={picture} />)}
+            </StyledGalleryRight>
+          </Flex>
+        </>
+        }
       </StyledBody>
     </MainLayout>
   )

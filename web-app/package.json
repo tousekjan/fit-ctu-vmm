@@ -10,6 +10,7 @@
     "ts:check": "tsc --noEmit",
     "code:check": "npx run-p pretty:check ts:check test",
     "pretty:fix": "prettier -- --write \"src/**/*.ts*\"",
+    "tslint:fix": "tslint --fix -c tslint.json -p .",
     "pretty:check": "prettier -- -l \"src/**/*.ts*\"",
     "build": "webpack --progress --config ./config/webpack.prod.js",
     "build:dev": "webpack-dev-server --config ./config/webpack.dev.js",

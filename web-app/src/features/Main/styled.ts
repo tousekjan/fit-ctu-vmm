@@ -1,10 +1,10 @@
-import { Button, Input, Layout, Switch } from 'antd'
+import { Button, DatePicker, Input, InputNumber, Layout, Switch } from 'antd'
 import { Flex } from 'components/Layout/styled';
 import Geosuggest from 'react-geosuggest';
 import styled from 'styled-components'
 
 export const StyledLoadingWrapper = styled.div`
-  min-height: 90vh;
+  min-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,12 +24,12 @@ export const MainLayout = styled(Layout)`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background: #f0f2f5; */
+  background: #f0f2f5;
 `
 
 export const StyledBody = styled(Layout)`
-  height: 100vh;
-  width: 80%;
+  min-height: 100vh !important;
+  width: 80vw;
   display: flex;
   align-items: center;
   background: white !important;
@@ -72,6 +72,14 @@ export const StyledDescription = styled.p`
 export const StyledSwitch = styled(Switch)`
   margin-right: 10px !important;
   margin-top: 6px !important;
+`
+
+export const StyledDatePicker = styled(DatePicker)`
+  width: 350px;
+`
+
+export const StyledInputNumber = styled(InputNumber)`
+  width: 350px !important;
 `
 
 export const StyledGeosuggest = styled(Geosuggest)`
@@ -129,4 +137,32 @@ export const StyledGeosuggest = styled(Geosuggest)`
     -webkit-text-fill-color: #b7b7b7;
     background-color: #f5f5f5;
   }
+`
+
+export const StyledTitleWrapper = styled(Flex)`
+  margin-top: 15px;
+`
+
+export const StyledTitlePicture = styled.div`
+  text-align: center;
+  width: 40vw;
+  margin-top: 15px;
+  font-size: 30px;
+`
+
+export const StyledGalleryLeft = styled(Flex)`
+  flex-wrap: wrap;
+  width: 40vw;
+  border-right: 2px solid grey;
+`
+
+export const StyledGalleryRight = styled(Flex)`
+  flex-wrap: wrap;
+  width: 40vw;
+`
+export const StyledImage = styled.img`
+  margin: 5px;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
 `

@@ -1,26 +1,32 @@
-import axios from 'axios'
+// import axios from 'axios'
 import qs from 'qs'
-import { Dispatch, useState } from 'react';
-import { SearchParams, Status } from './interfaces';
+import { Dispatch, useState } from 'react'
+import { SearchParams, Status } from './interfaces'
 
 export const useFetch = (baseUrl: string): [Dispatch<string>, Status] => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [data, setData] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     const fetchData = async (url: string) => {
-        setError(false);
-        setLoading(true);
-        try {
-            const result = await axios(`${baseUrl}${url}`);
-            setData(result.data);
-        } catch (error) {
-            setError(true);
-        }
-        setLoading(false);
-    };
-    return [fetchData, { data, loading, error }];
-};
+        setError(false)
+        setLoading(true)
+
+        // try {
+        //     const result = await axios(`${baseUrl}${url}`)
+        //     setData(result.data)
+        // } catch (error) {
+        //     setError(true)
+        // }
+
+        // tmp for test - mock and simulate loading
+        await wait(2000)
+        setData(getMock())
+
+        setLoading(false)
+    }
+    return [fetchData, { data, loading, error }]
+}
 
 export const parseToQuery = (data: SearchParams) => {
     const result = qs.stringify({
@@ -28,7 +34,22 @@ export const parseToQuery = (data: SearchParams) => {
         ...(data.uploadedChecked && { uploaded: data.uploaded.unix(), uploadedWeight: data.uploadedWeight }),
         ...(data.widthChecked && { width: data.width, widthWeight: data.widthWeight }),
         ...(data.geoChecked && { lat: data.lat, lon: data.lon, geoWeight: data.geoWeight }),
-    });
+    })
 
-    return result;
+    return result
 }
+
+const getMock = () => {
+    const url = 'https://live.staticflickr.com/5010/5287262740_a553142d9a_q.jpg'
+    let photos = 100
+
+    const result = { original: [], reranked: [] }
+    while (photos--) {
+        result.original.push(url)
+        result.reranked.push(url)
+    }
+
+    return result
+}
+
+const wait = ms => new Promise((r, j) => setTimeout(r, ms))
