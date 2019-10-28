@@ -30,7 +30,7 @@ export const CommonStyledLoader = styled.div<{ size: LoaderSize }>`
   width: ${({ size }) => sizeToPixels[size].size}px;
   border-radius: 50%;
   height: ${({ size }) => sizeToPixels[size].size}px;
-  border: ${({ size, theme }) => `${sizeToPixels[size].border}px solid ${theme.colors.primary}`};
+  border: ${({ size }) => `${sizeToPixels[size].border}px solid green`};
   animation: ${LoadingAnimation} 0.8s ease infinite;
 `
 
@@ -38,7 +38,7 @@ export const StyledLoader = styled.div<{ size: LoaderSize }>`
   width: ${({ size }) => sizeToPixels[size].size}px;
   border-radius: 50%;
   height: ${({ size }) => sizeToPixels[size].size}px;
-  border: ${({ size, theme }) => `${sizeToPixels[size].border}px solid ${theme.colors.primary}`};
+  border: ${({ size }) => `${sizeToPixels[size].border}px solid green`};
   animation: ${LoadingAnimation} 0.8s ease infinite;
   position: fixed;
   top: 50%;

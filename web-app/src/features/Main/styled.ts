@@ -3,6 +3,13 @@ import { Flex } from 'components/Layout/styled';
 import Geosuggest from 'react-geosuggest';
 import styled from 'styled-components'
 
+export const StyledLoadingWrapper = styled.div`
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export const StyledHeader = styled(Layout)`
   height: 50px;
   line-height: 50px;

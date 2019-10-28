@@ -4,11 +4,22 @@ import moment from 'moment';
 import React from 'react'
 
 import { Flex } from 'components/Layout/styled';
+import Loading from 'components/Loading';
 import SliderBox from 'components/SliderBox';
-import { MainLayout, StyledBody, StyledButton, StyledDescription, StyledGeosuggest, StyledHeader, StyledInput, StyledInputBox, StyledLogo, StyledSwitch, StyledTitle } from './styled';
+import { SearchParams } from './interfaces';
+import { MainLayout, StyledBody, StyledButton, StyledDescription, StyledGeosuggest, StyledHeader, StyledInput, StyledInputBox, StyledLoadingWrapper, StyledLogo, StyledSwitch, StyledTitle } from './styled';
+import { parseToQuery, useFetch } from './utils';
 
 const Main = ({ }) => {
-  // const credentials = qs.parse(search, { ignoreQueryPrefix: true })
+  const [fetchData, { loading, /*error, data*/ }] = useFetch('http://localhost:8080');
+
+  if (loading) {
+    return (
+      <StyledLoadingWrapper>
+        <Loading />
+      </StyledLoadingWrapper>)
+  }
+
   return (
     <MainLayout>
       <StyledHeader>
@@ -17,7 +28,7 @@ const Main = ({ }) => {
       <StyledBody>
         <Formik
           initialValues={{
-            search: '',
+            text: '',
             uploaded: moment(new Date, 'DD/MM/YYYY'),
             uploadedWeight: 50,
             uploadedChecked: false,
@@ -28,24 +39,22 @@ const Main = ({ }) => {
             lon: null,
             geoWeight: 50,
             geoChecked: false,
-          }}
-          // validationSchema={ValidationSchoolEditMode}
-          // validateOnChange={true}
-          onSubmit={data => {
-            console.log(data)
+          } as SearchParams}
+          onSubmit={(data: SearchParams) => {
+            fetchData(`/search?${parseToQuery(data)}`);
           }}
         >
           {({ submitForm, values, handleChange, setFieldValue }) => (
             <>
               <StyledInputBox direction="row">
                 <StyledInput
-                  name="search"
-                  value={values.search}
+                  name="text"
+                  value={values.text}
                   prefix={<Icon type="search"></Icon>}
                   placeholder="Photos, people or groups"
                   onChange={handleChange}
                 />
-                <StyledButton type="ghost" icon="search" onClick={() => submitForm()}>Search</StyledButton>
+                <StyledButton disabled={!values.text} type="ghost" icon="search" onClick={() => submitForm()}>Search</StyledButton>
               </StyledInputBox>
 
               <Flex direction="column">
