@@ -16,6 +16,9 @@ export interface SearchParams {
     uploaded: moment.Moment
     uploadedWeight: number
     uploadedChecked: boolean
+    time: moment.Moment
+    timeWeight: number
+    timeChecked: boolean
     width: number
     widthWeight: number
     widthChecked: boolean

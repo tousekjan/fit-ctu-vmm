@@ -23,6 +23,7 @@ import {
   StyledInputNumber,
   StyledLoadingWrapper,
   StyledLogo, StyledSwitch,
+  StyledTimePicker,
   StyledTitle,
   StyledTitlePicture,
   StyledTitleWrapper,
@@ -44,6 +45,9 @@ const Main = ({ }) => {
             uploaded: moment(new Date, 'DD/MM/YYYY'),
             uploadedWeight: 50,
             uploadedChecked: false,
+            time: moment('12:00:00', 'HH:mm:ss'),
+            timeWeight: 50,
+            timeChecked: false,
             width: 1000,
             widthWeight: 50,
             widthChecked: false,
@@ -85,6 +89,22 @@ const Main = ({ }) => {
 
                   <StyledDescription> weight </StyledDescription>
                   <SliderBox name="uploadedWeight" disabled={!values.uploadedChecked} setFieldValue={setFieldValue} values={values} />
+                </Flex>
+
+                <StyledTitle>Time taken</StyledTitle>
+                <Flex direction="row">
+                  <StyledSwitch defaultChecked={values.timeChecked} onChange={data => setFieldValue('timeChecked', data)} />
+                  <div>
+                    <StyledTimePicker
+                      disabled={!values.timeChecked}
+                      value={values.time}
+                      allowClear={false}
+                      onChange={data => setFieldValue('time', data ? moment(data, 'HH:mm:ss') : data)}
+                    />
+                  </div>
+
+                  <StyledDescription> weight </StyledDescription>
+                  <SliderBox name="timeWeight" disabled={!values.timeChecked} setFieldValue={setFieldValue} values={values} />
                 </Flex>
 
                 <StyledTitle>Picture width (px)</StyledTitle>

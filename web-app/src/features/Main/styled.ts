@@ -1,4 +1,4 @@
-import { Button, DatePicker, Input, InputNumber, Layout, Switch } from 'antd'
+import { Button, DatePicker, Input, InputNumber, Layout, Switch, TimePicker } from 'antd'
 import { Flex } from 'components/Layout/styled';
 import Geosuggest from 'react-geosuggest';
 import styled from 'styled-components'
@@ -76,6 +76,10 @@ export const StyledSwitch = styled(Switch)`
 
 export const StyledDatePicker = styled(DatePicker)`
   width: 350px;
+`
+
+export const StyledTimePicker = styled(TimePicker)`
+  width: 350px !important;
 `
 
 export const StyledInputNumber = styled(InputNumber)`

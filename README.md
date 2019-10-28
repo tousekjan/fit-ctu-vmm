@@ -23,6 +23,8 @@ request - real example:
  - text (string not null or empty)
  - uploaded (example: 1571728392 - timestamp)
  - uploadedWeight <0,100>
+ - time (date time of photo take; example: 1571728392 - timestamp)
+ - timeWeight <0,100>
  - width <0,5000>
  - widthWeight <0,100>
  - lat (-77.0364)
@@ -48,6 +50,4 @@ poznamky:
 - uploaded a uploadedWeight (datum uploadu fotografie)
 - velikost - sirka (porovnavat s puvodni)
 
-zatim neimplementovano, ale napady:
-- cas porizeni (00:00 - 23:59) - uzivatel by tak mohl vybrat, ze chce napr fotku, vyfocenou v poledne
 - orientace (na sirku, na vysku, ctverec)

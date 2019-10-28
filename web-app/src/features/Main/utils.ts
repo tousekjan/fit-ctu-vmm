@@ -36,6 +36,7 @@ export const parseToQuery = (data: SearchParams) => {
     const result = qs.stringify({
         ...{ text: data.text },
         ...(data.uploadedChecked && { uploaded: data.uploaded.unix(), uploadedWeight: data.uploadedWeight }),
+        ...(data.timeChecked && { time: data.time.unix(), timeWeight: data.timeWeight }),
         ...(data.widthChecked && { width: data.width, widthWeight: data.widthWeight }),
         ...(data.geoChecked && { lat: data.lat, lon: data.lon, geoWeight: data.geoWeight }),
     })
