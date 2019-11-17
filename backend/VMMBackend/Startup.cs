@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using VMMBackend.Configs;
 
 namespace VMMBackend
 {
@@ -41,8 +42,10 @@ namespace VMMBackend
                 app.UseHsts();
             }
 
+            app.UseCors(CorsConfig.Setup);
             app.UseHttpsRedirection();
             app.UseMvc();
+            
         }
     }
 }
