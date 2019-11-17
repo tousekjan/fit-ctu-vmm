@@ -14,7 +14,7 @@
     "pretty:check": "prettier -- -l \"src/**/*.ts*\"",
     "build": "webpack --progress --config ./config/webpack.prod.js",
     "build:dev": "webpack-dev-server --config ./config/webpack.dev.js",
-    "dev": "STAGE_CONFIG=localhost npm-run-all locale --parallel ts:watch build:dev",
+    "dev": "npm-run-all locale --parallel ts:watch build:dev",
     "dev:mock": "STAGE_CONFIG=mock npm-run-all locale --parallel ts:watch build:dev",
     "prod": "run-s code:check locale build",
     "test": "jest --env=jsdom",
