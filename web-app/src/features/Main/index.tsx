@@ -1,4 +1,4 @@
-import { Icon } from 'antd'
+import { Icon, Input } from 'antd'
 import { Formik } from 'formik'
 import moment from 'moment'
 import React from 'react'
@@ -42,6 +42,9 @@ const Main = ({ }) => {
         <Formik
           initialValues={{
             text: '',
+            description: '',
+            descriptionWeight: 50,
+            descriptionChecked: false,
             uploaded: moment(new Date, 'DD/MM/YYYY'),
             uploadedWeight: 50,
             uploadedChecked: false,
@@ -51,6 +54,9 @@ const Main = ({ }) => {
             width: 1000,
             widthWeight: 50,
             widthChecked: false,
+            likes: 5000,
+            likesWeight: 50,
+            likesChecked: false,
             lat: null,
             lon: null,
             geoWeight: 50,
@@ -74,6 +80,19 @@ const Main = ({ }) => {
               </StyledInputBox>
 
               <Flex direction="column">
+                <StyledTitle>Description</StyledTitle>
+                <Flex direction="row">
+                  <StyledSwitch defaultChecked={values.descriptionChecked} onChange={data => setFieldValue('descriptionChecked', data)} />
+                  <Input
+                    name="description"
+                    disabled={!values.descriptionChecked}
+                    value={values.description}
+                    onChange={handleChange}
+                  />
+                  <StyledDescription>weight</StyledDescription>
+                  <SliderBox name="descriptionWeight" disabled={!values.descriptionChecked} setFieldValue={setFieldValue} values={values} />
+                </Flex>
+
                 <StyledTitle>Date uploaded</StyledTitle>
                 <Flex direction="row">
                   <StyledSwitch defaultChecked={values.uploadedChecked} onChange={data => setFieldValue('uploadedChecked', data)} />
@@ -122,6 +141,21 @@ const Main = ({ }) => {
                   <SliderBox name="widthWeight" disabled={!values.widthChecked} setFieldValue={setFieldValue} values={values} />
                 </Flex>
 
+                <StyledTitle>Likes</StyledTitle>
+                <Flex direction="row">
+                  <StyledSwitch defaultChecked={values.likesChecked} onChange={data => setFieldValue('likesChecked', data)} />
+                  <StyledInputNumber
+                    disabled={!values.likesChecked}
+                    min={0}
+                    max={1000000}
+                    step={1000}
+                    value={values.likes}
+                    onChange={data => setFieldValue('likes', data)}
+                  />
+                  <StyledDescription>weight</StyledDescription>
+                  <SliderBox name="likesWeight" disabled={!values.likesChecked} setFieldValue={setFieldValue} values={values} />
+                </Flex>
+
                 <StyledTitle>Location of picture</StyledTitle>
                 <Flex direction="row">
                   <StyledSwitch defaultChecked={values.geoChecked} onChange={data => setFieldValue('geoChecked', data)} />
@@ -155,10 +189,14 @@ const Main = ({ }) => {
 
           <Flex direction="row">
             <StyledGalleryLeft justify="center" alignItems="center">
-              {data.original.map(picture => <StyledImage key={`${picture}-original`} src={picture} />)}
+              {data.original.map(picture =>
+                <StyledImage key={`${picture}-original`} src={typeof picture === 'string' ? picture : picture.url} />
+              )}
             </StyledGalleryLeft>
             <StyledGalleryRight justify="center" alignItems="center">
-              {data.reranked.map(picture => <StyledImage key={`${picture}-reranked`} src={picture} />)}
+              {data.reranked.map(picture =>
+                <StyledImage key={`${picture}-reranked`} src={typeof picture === 'string' ? picture : picture.url} />
+              )}
             </StyledGalleryRight>
           </Flex>
         </>

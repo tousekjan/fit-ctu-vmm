@@ -35,9 +35,11 @@ export const useFetch = (baseUrl: string): [Dispatch<string>, Status] => {
 export const parseToQuery = (data: SearchParams) => {
     const result = qs.stringify({
         ...{ text: data.text },
+        ...(data.descriptionChecked && { description: data.description, descriptionWeight: data.descriptionWeight }),
         ...(data.uploadedChecked && { uploaded: data.uploaded.unix(), uploadedWeight: data.uploadedWeight }),
         ...(data.timeChecked && { time: data.time.unix(), timeWeight: data.timeWeight }),
         ...(data.widthChecked && { width: data.width, widthWeight: data.widthWeight }),
+        ...(data.likesChecked && { likes: data.likes, likesWeight: data.likesWeight }),
         ...(data.geoChecked && { lat: data.lat, lon: data.lon, geoWeight: data.geoWeight }),
     })
 
