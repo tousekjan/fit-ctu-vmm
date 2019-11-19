@@ -149,7 +149,7 @@ const Main = ({ }) => {
 
         {!loading && data && <>
           <StyledTitleWrapper direction="row" justify="center" alignItems="center">
-            <StyledTitlePicture>Orignal</StyledTitlePicture>
+            <StyledTitlePicture>Original</StyledTitlePicture>
             <StyledTitlePicture>Reranked</StyledTitlePicture>
           </StyledTitleWrapper>
 
