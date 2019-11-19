@@ -41,7 +41,7 @@ namespace VMMBackend.Controllers
             var response = new SearchResponse
             {
                 Original = photos.Select(x => x.WebUrl),
-                Reranked = rerankedResults
+                Reranked = photos.Select(x => x.WebUrl)
             };
 
             return response;
