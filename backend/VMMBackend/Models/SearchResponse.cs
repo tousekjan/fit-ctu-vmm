@@ -4,7 +4,7 @@ namespace VMMBackend.Models
 {
     public class SearchResponse
     {
-        public IEnumerable<string> Original { get; set; }
-        public IEnumerable<string> Reranked { get; set; }
+        public IEnumerable<PhotoModel> Original { get; set; }
+        public IEnumerable<PhotoModel> Reranked { get; set; }
     }
 }

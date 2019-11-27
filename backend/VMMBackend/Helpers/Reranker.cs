@@ -1,19 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using VMMBackend.Models;
 
 namespace VMMBackend.Helpers
 {
     public static class Reranker
     {
-        public static IEnumerable<string> GetReranked(IEnumerable<PhotoModel> photos, RerankingParameters parameters)
+        private static readonly Random random = new Random();
+        
+        public static IEnumerable<PhotoModel> GetReranked(List<PhotoModel> photos, RerankingParameters parameters)
         {
             //Calculate score for every photo
             //Order photos by score
-            //bigger distance - lower score
-            //score = (Score1 * Weight1 / Normalization + ... + ScoreN * WeightN / Normalization)
+            //bigger distance -> lower score
+            //score = (Score1 * Weight1 / Normalization1 + ... + ScoreN * WeightN / NormalizationN)
 
-            throw new NotImplementedException();
+            var rerankedPhotos = new List<PhotoModel>(photos);
+
+            foreach (var photo in rerankedPhotos)
+            {
+                photo.Score = CalculateScore(photo, parameters);
+            }
+
+            return rerankedPhotos.OrderByDescending(x => x.Score);
+        }
+
+        private static double CalculateScore(PhotoModel photo, RerankingParameters parameters)
+        {
+#warning implementovat vypocet skore
+            return Math.Round(random.NextDouble(), 2);
         }
 
         private static int GetEditDistance(string first, string second)

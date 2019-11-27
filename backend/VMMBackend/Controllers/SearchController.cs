@@ -20,7 +20,7 @@ namespace VMMBackend.Controllers
             int widthWeight, double lat, double lon, int geoWeight)
         {
             var client = new FlickrClient();
-            var photos = client.Search(text, lat, lon);
+            var photos = client.Search(text, lat, lon).ToList();
 
             var rerankingParameters = new RerankingParameters
             {
@@ -36,15 +36,13 @@ namespace VMMBackend.Controllers
                 GeoWeight = geoWeight
             };
 
-            var rerankedResults = new List<string>();// Reranker.GetReranked(photos, rerankingParameters);
+            var rerankedPhotos = Reranker.GetReranked(photos, rerankingParameters).ToList();
 
-            var response = new SearchResponse
+            return new SearchResponse
             {
-                Original = photos.Select(x => x.WebUrl),
-                Reranked = photos.Select(x => x.WebUrl)
+                Original = photos,
+                Reranked = rerankedPhotos
             };
-
-            return response;
         }
     }
 }

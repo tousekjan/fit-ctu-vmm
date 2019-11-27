@@ -24,10 +24,12 @@ namespace VMMBackend.Helpers
             {
                 HasGeo = true,
                 Text = text,
-                
-                Latitude = lat,
-                Longitude = lon,                
-                Extras = PhotoSearchExtras.DateUploaded | PhotoSearchExtras.DateTaken | PhotoSearchExtras.Geo
+                Extras = PhotoSearchExtras.DateUploaded | 
+                         PhotoSearchExtras.DateTaken | 
+                         PhotoSearchExtras.Geo | 
+                         PhotoSearchExtras.Description | 
+                         PhotoSearchExtras.Views |
+                         PhotoSearchExtras.OriginalDimensions
             };
 
             PhotoCollection response = _flickr.PhotosSearch(options);
@@ -39,7 +41,9 @@ namespace VMMBackend.Helpers
                 DateUploaded = x.DateUploaded,
                 Latitude = x.Latitude,
                 Longitude = x.Longitude,
-                WebUrl = x.MediumUrl
+                WebUrl = x.MediumUrl,
+                Description = x.Description,
+                Width = x.OriginalWidth
             });
         }
     }
