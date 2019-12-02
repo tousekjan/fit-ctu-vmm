@@ -96,6 +96,8 @@ export const StyledGeosuggest = styled(Geosuggest)`
     padding: 2px;
     border-style: solid;
     border-width: 1px;
+    position: absolute;
+    background-color: white;
   }
 
   li {
