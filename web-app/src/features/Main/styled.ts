@@ -170,3 +170,18 @@ export const StyledImage = styled.img`
   height: 140px;
   object-fit: cover;
 `
+
+export const StyledScore = styled.div`
+  margin-top: -35;
+  margin-left: 108;
+  background-color: black;
+  color: white;
+  position: absolute;
+  padding: 3;
+  border-radius: 50%;
+  width: 35px;
+  height: 26px;
+  text-align: center;
+  font-size: 12;
+  border: 1px solid white;
+`

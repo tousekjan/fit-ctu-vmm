@@ -22,7 +22,8 @@ import {
   StyledInputBox,
   StyledInputNumber,
   StyledLoadingWrapper,
-  StyledLogo, StyledSwitch,
+  StyledLogo, StyledScore,
+  StyledSwitch,
   StyledTimePicker,
   StyledTitle,
   StyledTitlePicture,
@@ -190,12 +191,15 @@ const Main = ({ }) => {
           <Flex direction="row">
             <StyledGalleryLeft justify="center" alignItems="center">
               {data.original.map(picture =>
-                <StyledImage key={`${picture}-original`} src={typeof picture === 'string' ? picture : picture.url} />
+                <StyledImage key={`${picture.photoId}-original`} src={picture.webUrl} />
               )}
             </StyledGalleryLeft>
             <StyledGalleryRight justify="center" alignItems="center">
               {data.reranked.map(picture =>
-                <StyledImage key={`${picture}-reranked`} src={typeof picture === 'string' ? picture : picture.url} />
+                <div>
+                  <StyledImage key={`${picture.photoId}-reranked`} src={picture.webUrl} />
+                  <StyledScore>{`${Math.round(picture.score * 100)}%`}</StyledScore>
+                </div>
               )}
             </StyledGalleryRight>
           </Flex>

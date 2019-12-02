@@ -40,7 +40,7 @@ response (JSON - 200 OK || 400 Bad request):
     original: 
     [
         {
-            url: "https://Flickr.image1231654.jpg",
+            webUrl: "https://Flickr.image1231654.jpg",
             text: "car",
             description: "Car on road",
             uploaded: 1571728392,
@@ -51,7 +51,7 @@ response (JSON - 200 OK || 400 Bad request):
             lon: 38.8951
         },
          {
-            url: "https://Flickr.image1231653.jpg",
+            webUrl: "https://Flickr.image1231653.jpg",
             text: "car",
             description: "My car",
             uploaded: 1571728392,
