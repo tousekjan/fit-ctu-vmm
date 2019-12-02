@@ -1,4 +1,4 @@
-import { Icon, Input } from 'antd'
+import { Icon, Input, Popover } from 'antd'
 import { Formik } from 'formik'
 import moment from 'moment'
 import React from 'react'
@@ -33,6 +33,23 @@ import { parseToQuery, useFetch } from './utils'
 
 const Main = ({ }) => {
   const [fetchData, { loading, data /*error*/ }] = useFetch('http://localhost:8080')
+
+  const trimEllip = (str: String) => {
+    const length = 60;
+    return str && str.length > length ? `${str.substring(0, length - 3)}...` : str;
+  }
+
+  const getMetadata = (picture) => (
+    <div style={{minWidth: 410}}>
+      <p><b>Description:</b> {trimEllip(picture.description)}</p>
+      <p><b>Date uploaded:</b> {picture.dateUploaded ? moment(picture.dateUploaded).format('YYYY-MM-DD') : null}</p>
+      <p><b>Time taken:</b> {picture.dateTaken ? moment(picture.dateTaken).format('HH:mm:ss') : null}</p>
+      <p><b>Picture width:</b> {picture.width && (picture.width !== 0) ? `${picture.width}px` : null}</p>
+      <p><b>Likes:</b> {picture.likes}</p>
+      <p><b>Latitude:</b> {picture.latitude}</p>
+      <p><b>Longitude:</b> {picture.longitude}</p>
+    </div>
+  );
 
   return (
     <MainLayout>
@@ -197,7 +214,9 @@ const Main = ({ }) => {
             <StyledGalleryRight justify="center" alignItems="center">
               {data.reranked.map(picture =>
                 <div>
-                  <StyledImage key={`${picture.photoId}-reranked`} src={picture.webUrl} />
+                  <Popover placement="top" content={getMetadata(picture)} title={`Score: ${Math.round(picture.score * 100)}%`}>
+                    <StyledImage key={`${picture.photoId}-reranked`} src={picture.webUrl} />
+                  </Popover>
                   <StyledScore>{`${Math.round(picture.score * 100)}%`}</StyledScore>
                 </div>
               )}
