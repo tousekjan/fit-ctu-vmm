@@ -27,7 +27,6 @@ namespace VMMBackend.Helpers
             var rerankedPhotos = new List<PhotoModel>(photos);
 
             Parallel.ForEach(rerankedPhotos, 
-                new ParallelOptions { MaxDegreeOfParallelism = 4 }, 
                 (photo) =>
                 {
                     photo.Score = CalculateScore(photo, parameters);

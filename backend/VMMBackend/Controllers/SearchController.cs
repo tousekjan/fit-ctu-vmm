@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -42,12 +43,18 @@ namespace VMMBackend.Controllers
                 GeoWeight = geoWeight
             };
 
-            var rerankedPhotos = Reranker.GetReranked(photos, rerankingParameters).ToList();
+            var stopWatch = Stopwatch.StartNew();
+            var rerankedPhotos = Reranker.GetRerankedParallel(photos, rerankingParameters).ToList();
+            stopWatch.Stop();
+
+            Console.WriteLine($"GetReranked took: {stopWatch.ElapsedMilliseconds} Milliseconds");
+
 
             return new SearchResponse
             {
+                RarankingTime = stopWatch.ElapsedMilliseconds,
                 Original = photos,
-                Reranked = rerankedPhotos
+                Reranked = rerankedPhotos,
             };
         }
     }
