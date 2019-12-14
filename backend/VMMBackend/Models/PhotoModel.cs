@@ -13,5 +13,7 @@ namespace VMMBackend.Models
         public string Description { get; set; }
         public int Width { get; set; }
         public double Score { get; set; }
+        public int Likes { get; set; }
+        public string Text { get; set; }
     }
 }

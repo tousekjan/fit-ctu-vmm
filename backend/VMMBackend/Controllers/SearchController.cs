@@ -15,22 +15,28 @@ namespace VMMBackend.Controllers
     {
         [HttpGet]
         public ActionResult<SearchResponse> Get(
-            string text, long uploaded, int uploadedWeight,
+            string text, string description, int descriptionWeight, 
+            long uploaded, int uploadedWeight,
             long time, int timeWeight, int width,
-            int widthWeight, double lat, double lon, int geoWeight)
+            int widthWeight, int likes, int likesWeight, 
+            double lat, double lon, int geoWeight)
         {
             var client = new FlickrClient();
-            var photos = client.Search(text, lat, lon).ToList();
+            var photos = client.Search(text).ToList();
 
             var rerankingParameters = new RerankingParameters
             {
                 Text = text,
+                Description = description,
+                DescriptionWeight = descriptionWeight,
                 Uploaded = uploaded,
                 UploadedWeight = uploadedWeight,
                 Time = time,
                 TimeWeight = timeWeight,
                 Width = width,
                 WidthWeight = widthWeight,
+                Likes = likes,
+                LikesWeight = likesWeight,
                 Latitude = lat,
                 Longtitude = lon,
                 GeoWeight = geoWeight

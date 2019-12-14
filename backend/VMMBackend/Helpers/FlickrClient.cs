@@ -18,7 +18,7 @@ namespace VMMBackend.Helpers
             _flickr = new Flickr(API_KEY, SECRET);
         }
 
-        public IEnumerable<PhotoModel> Search(string text, double lat, double lon)
+        public IEnumerable<PhotoModel> Search(string text)
         {
             PhotoSearchOptions options = new PhotoSearchOptions
             {
@@ -29,13 +29,15 @@ namespace VMMBackend.Helpers
                          PhotoSearchExtras.Geo | 
                          PhotoSearchExtras.Description | 
                          PhotoSearchExtras.Views |
-                         PhotoSearchExtras.OriginalDimensions
+                         PhotoSearchExtras.OriginalDimensions |
+                         PhotoSearchExtras.CountFaves
             };
 
             PhotoCollection response = _flickr.PhotosSearch(options);
 
             return response.Select(x => new PhotoModel
             {
+                Text = x.Title,
                 PhotoId = x.PhotoId,
                 DateTaken = x.DateTaken,
                 DateUploaded = x.DateUploaded,
@@ -43,7 +45,8 @@ namespace VMMBackend.Helpers
                 Longitude = x.Longitude,
                 WebUrl = x.MediumUrl,
                 Description = x.Description,
-                Width = x.OriginalWidth
+                Width = x.OriginalWidth,
+                Likes = x.CountFaves.GetValueOrDefault()
             });
         }
     }
