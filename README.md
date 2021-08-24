@@ -6,7 +6,7 @@ A school project for course MI-VMM for advanced search on Flickr. Authors: [@tou
 * install .NET Core 3.1
 * go to folder backend/VMMBackend, command `cd backend/VMMBackend`
 * run `dotnet run`
-* web API running on http://localhost:8000
+* web API running on http://localhost:8080
 * for full experience also run frontend
 
 ## How to run fronted web application:
