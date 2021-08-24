@@ -2,18 +2,24 @@
 
 A school project for course MI-VMM for advanced search on Flickr.
 
+## How to run backend web API:
+* install .NET Core 3.1
+* go to folder backend/VMMBackend, command `cd backend/VMMBackend`
+* run `dotnet run`
+* web API running on http://localhost:8000
+* for full experience also run frontend
 
 ## How to run fronted web application:
 
- - install npm and yarn
- - go to folder web-app, command on Linux: `cd web-app`
- - install npm packages `yarn`, alternatively `npm install`
- - run `yarn dev`, alternatively `npm run dev`
- - web-app running on `http://localhost:8000`
- - (for searching is necessary tu run backend on http://localhost:8080 and implement API - see below)
+* install npm and yarn
+* go to folder web-app, command on Linux: `cd web-app`
+* install npm packages `yarn`, alternatively `npm install`
+* run `yarn dev`, alternatively `npm run dev`
+* web-app running on `http://localhost:8000`
+* (for searching is necessary tu run backend on http://localhost:8080 and implement API - see below)
 
 ### Run frontend with mock of backend
- - run `yarn dev:mock`, alternatively `npm run dev:mock`
+* run `yarn dev:mock`, alternatively `npm run dev:mock`
 
 
 ## API design and description:
@@ -35,6 +41,7 @@ request - real example:
  - lon (38.8951)
  - geoWeight <0,100>
 
+```json
 response (JSON - 200 OK || 400 Bad request):
 {
     original: 
@@ -90,20 +97,4 @@ response (JSON - 200 OK || 400 Bad request):
         }
     ],
 }
-
-poznamku po konzultaci -> ukoly:
-- [Cyril] frontend: dodelat UI pro description, pocet like
-- [Cyril] frontent: zobrazeni skore + zobrazeni tech metadat
-- [Jan] vypocitat skore - vrati to hodnotu <0, 1>
-
-- [Jan] dodelat backendove funkkce + u obecnych parametru jako je sirka si dat nejaky experimentalni maximum
-- [Jan] zkusit udelat na vice vlaknech pocitani jednotlivych parametru
-- [Cyril] napsat zpravu + zmerit casy
-
-
-poznamky:
-- geo gps (pouzijeme hasGeo), specialni porovnavani (viz wiki), ktere uvazuje zakriveni zeme
-- uploaded a uploadedWeight (datum uploadu fotografie)
-- velikost - sirka (porovnavat s puvodni)
-
-- orientace (na sirku, na vysku, ctverec)
+```
