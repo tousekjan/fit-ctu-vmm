@@ -1,6 +1,6 @@
 # Flick++
 
-A school project for course MI-VMM for advanced search on Flickr.
+A school project for course MI-VMM for advanced search on Flickr. Authors: [@tousekjan](https://github.com/tousekjan), [@cyrilurban](https://github.com/cyrilurban)
 
 ## How to run backend web API:
 * install .NET Core 3.1
