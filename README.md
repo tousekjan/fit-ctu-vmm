@@ -41,8 +41,9 @@ request - real example:
  - lon (38.8951)
  - geoWeight <0,100>
 
+ Response: (JSON - 200 OK || 400 Bad request)
 ```json
-response (JSON - 200 OK || 400 Bad request):
+response: 
 {
     original: 
     [
